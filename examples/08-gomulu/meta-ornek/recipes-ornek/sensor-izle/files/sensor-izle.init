@@ -1,0 +1,69 @@
+#!/bin/sh
+# SPDX-License-Identifier: MIT
+### BEGIN INIT INFO
+# Provides:          sensor-izle
+# Required-Start:    $local_fs
+# Required-Stop:     $local_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Sıcaklık sensörü izleme servisi
+### END INIT INFO
+#
+# SysV init betiği. update-rc.d sınıfı bu dosyayı /etc/init.d/sensor-izle olarak kurar ve
+# /etc/rcN.d/ altına S/K bağlantılarını oluşturur. Debian ve BusyBox start-stop-daemon ile çalışır.
+# Program iletilerini standart çıktıya yazar; bu betik çıktıyı LOG dosyasına yönlendirir.
+# DAEMON, PIDFILE ve LOG yalnızca denemeler için ortamdan geçersiz kılınabilir.
+
+NAME=sensor-izle
+DAEMON=${DAEMON:-/usr/bin/sensor-izle}
+PIDFILE=${PIDFILE:-/run/$NAME.pid}
+LOG=${LOG:-/var/log/$NAME.log}
+
+[ -x "$DAEMON" ] || exit 0
+
+calisiyor_mu() {
+    [ -r "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null
+}
+
+case "$1" in
+    start)
+        printf 'Starting %s: ' "$NAME"
+        if calisiyor_mu; then
+            echo "zaten çalışıyor"
+            exit 0
+        fi
+        # -b arka plana alır, -m PID dosyasını start-stop-daemon'un kendisi yazar.
+        # -b ile standart çıktı kapatıldığından yönlendirme bir ara kabukla yapılır;
+        # exec sayesinde ara kabuk programa dönüşür ve PID değişmez.
+        start-stop-daemon -S -q -b -m -p "$PIDFILE" -x /bin/sh -- \
+            -c "exec \"\$0\" >> \"\$1\" 2>&1" "$DAEMON" "$LOG"
+        echo "tamam"
+        ;;
+    stop)
+        printf 'Stopping %s: ' "$NAME"
+        start-stop-daemon -K -q -o -p "$PIDFILE" -s TERM
+        rm -f "$PIDFILE"
+        echo "tamam"
+        ;;
+    reload)
+        start-stop-daemon -K -q -p "$PIDFILE" -s HUP
+        ;;
+    restart)
+        "$0" stop
+        sleep 1
+        "$0" start
+        ;;
+    status)
+        if calisiyor_mu; then
+            echo "$NAME çalışıyor (PID $(cat "$PIDFILE"))"
+        else
+            echo "$NAME çalışmıyor"
+            exit 3                      # LSB: 3 = program çalışmıyor
+        fi
+        ;;
+    *)
+        echo "Kullanım: $0 {start|stop|restart|reload|status}" >&2
+        exit 1
+        ;;
+esac
+exit 0

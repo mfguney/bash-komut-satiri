@@ -1,0 +1,7 @@
+# shellcheck shell=sh disable=SC2034
+# SPDX-License-Identifier: MIT
+# /etc/default/sensor-izle: sensor-izle servisinin ayarları.
+# Program tarafından '.' ile kaynaklanır; bu nedenle kabuk sözdizimi kullanılır.
+ARALIK=5
+ESIK=26000
+GIRDI=/sys/class/hwmon/hwmon0/temp1_input

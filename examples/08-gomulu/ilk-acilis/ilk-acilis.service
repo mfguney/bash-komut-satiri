@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: MIT
+[Unit]
+Description=Cihaz kimliğinin ilk açılışta oluşturulması
+ConditionPathExists=!/data/kimlik
+After=local-fs.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/ilk-acilis
+
+[Install]
+WantedBy=multi-user.target

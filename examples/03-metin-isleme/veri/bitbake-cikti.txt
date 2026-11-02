@@ -1,0 +1,26 @@
+NOTE: Resolving any missing task queue dependencies
+NOTE: Executing Tasks
+WARNING: kalibrasyon-veri-1.0-r0 do_package_qa: QA Issue: kalibrasyon-veri: Files/directories were installed but not shipped in any package:
+  /usr/share/kalibrasyon/kalibrasyon.csv
+Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
+kalibrasyon-veri: 1 installed and not shipped files. [installed-vs-shipped]
+WARNING: olcum-gunluk-1.0-r0 do_package_qa: QA Issue: File /usr/bin/olcum-gunluk in package olcum-gunluk doesn't have GNU_HASH (didn't pass LDFLAGS?) [ldflags]
+WARNING: alarm-izle-1.0-r0 do_package_qa: QA Issue: File /usr/bin/alarm-izle in package alarm-izle doesn't have GNU_HASH (didn't pass LDFLAGS?) [ldflags]
+WARNING: saglik-kontrol-1.0-r0 do_package_qa: QA Issue: /usr/bin/saglik-kontrol contained in package saglik-kontrol requires /usr/bin/python3, but no providers found in RDEPENDS:saglik-kontrol? [file-rdeps]
+ERROR: modbus-izle-1.0-r0 do_compile: Execution of '/home/gelistirici/bitbake-builds/ornek/build/tmp/work/x86-64-v3-poky-linux/modbus-izle/1.0/temp/run.do_compile.41872' failed with exit code 1
+ERROR: Logfile of failure stored in: /home/gelistirici/bitbake-builds/ornek/build/tmp/work/x86-64-v3-poky-linux/modbus-izle/1.0/temp/log.do_compile.41872
+Log data follows:
+| DEBUG: Executing shell function do_compile
+| modbus-izle.c: In function 'main':
+| modbus-izle.c:14:5: error: implicit declaration of function 'modbus_new_tcp' [-Wimplicit-function-declaration]
+|    14 |     modbus_new_tcp("192.168.7.10", 502);
+|       |     ^~~~~~~~~~~~~~
+| WARNING: exit code 1 from a shell command.
+ERROR: Task (/home/gelistirici/katmanlar/meta-ornek-hatali/recipes-hatali/modbus-izle/modbus-izle_1.0.bb:do_compile) failed with exit code '1'
+NOTE: Tasks Summary: Attempted 2876 tasks of which 2861 didn't need to be rerun and 1 failed.
+
+Summary: 1 task failed:
+  /home/gelistirici/katmanlar/meta-ornek-hatali/recipes-hatali/modbus-izle/modbus-izle_1.0.bb:do_compile
+    log: /home/gelistirici/bitbake-builds/ornek/build/tmp/work/x86-64-v3-poky-linux/modbus-izle/1.0/temp/log.do_compile.41872
+Summary: There were 4 WARNING messages.
+Summary: There was 1 ERROR message, returning a non-zero exit code.

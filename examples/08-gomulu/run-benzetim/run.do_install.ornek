@@ -1,0 +1,91 @@
+#!/bin/sh
+
+# BÖLÜM 8 ÖRNEĞİ: BitBake'in sensor-izle tarifi için ürettiği temp/run.do_install dosyasının
+# yapısını izleyen, elle KISALTILMIŞ bir örnektir. Kabuk tuzağı kodu bitbake/lib/bb/build.py
+# içindeki shell_trap_code() çıktısıyla aynıdır; dışa aktarılan değişkenlerin çoğu çıkarılmıştır.
+# Gerçek dosya derleme dizininde ${T}/run.do_install.<pid> adıyla oluşur.
+
+__BITBAKE_LAST_LINE=0
+
+# Emit a useful diagnostic if something fails:
+bb_sh_exit_handler() {
+    ret=$?
+    if [ "$ret" != 0 ]; then
+        echo "WARNING: exit code $ret from a shell command."
+    fi
+    exit $ret
+}
+
+bb_bash_exit_handler() {
+    ret=$?
+    { set +x; } > /dev/null
+    trap "" DEBUG
+    if [ "$ret" != 0 ]; then
+        echo "WARNING: ${BASH_SOURCE[0]}:${__BITBAKE_LAST_LINE} exit $ret from '$1'"
+
+        echo "WARNING: Backtrace (BB generated script): "
+        for i in $(seq 1 $((${#FUNCNAME[@]} - 1))); do
+            if [ "$i" -eq 1 ]; then
+                echo -e "\t#$((i)): ${FUNCNAME[$i]}, ${BASH_SOURCE[$((i-1))]}, line ${__BITBAKE_LAST_LINE}"
+            else
+                echo -e "\t#$((i)): ${FUNCNAME[$i]}, ${BASH_SOURCE[$((i-1))]}, line ${BASH_LINENO[$((i-1))]}"
+            fi
+        done
+    fi
+    exit $ret
+}
+
+bb_bash_debug_handler() {
+    local line=${BASH_LINENO[0]}
+    # For some reason the DEBUG trap trips with lineno=1 when scripts exit; ignore it
+    if [ "$line" -eq 1 ]; then
+        return
+    fi
+
+    # Track the line number of commands as they execute. This is so we can have access to the failing line number
+    # in the EXIT trap. See http://gnu-bash.2382.n7.nabble.com/trap-echo-quot-trap-exit-on-LINENO-quot-EXIT-gt-wrong-linenumber-td3666.html
+    if [ "${FUNCNAME[1]}" != "bb_bash_exit_handler" ]; then
+        __BITBAKE_LAST_LINE=$line
+    fi
+}
+
+case $BASH_VERSION in
+"") trap 'bb_sh_exit_handler' 0
+    set -e
+    ;;
+*)  trap 'bb_bash_exit_handler "$BASH_COMMAND"' 0
+    trap '{ bb_bash_debug_handler; } 2>/dev/null' DEBUG
+    set -e
+    shopt -s extdebug
+    ;;
+esac
+export AR="x86_64-poky-linux-gcc-ar"
+export CC="x86_64-poky-linux-gcc  -m64 -march=x86-64-v3 -fstack-protector-strong -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/gelistirici/bitbake-builds/ornek/build/tmp/work/x86-64-v3-poky-linux/sensor-izle/1.0/recipe-sysroot"
+export LC_ALL="en_US.UTF-8"
+# ... (dışa aktarılan diğer değişkenler kısaltılmıştır)
+export PATH="/home/gelistirici/bitbake-builds/ornek/build/tmp/work/x86-64-v3-poky-linux/sensor-izle/1.0/recipe-sysroot-native/usr/bin:/home/gelistirici/bitbake-builds/ornek/build/tmp/work/x86-64-v3-poky-linux/sensor-izle/1.0/recipe-sysroot-native/bin:/home/gelistirici/bitbake-builds/ornek/build/tmp/hosttools"
+export TZ="UTC"
+
+# line: 27, file: /home/gelistirici/yocto-gomulu-linux/examples/meta-ornek/recipes-ornek/sensor-izle/sensor-izle_1.0.bb
+do_install() {
+    install -d /home/gelistirici/bitbake-builds/ornek/build/tmp/work/x86-64-v3-poky-linux/sensor-izle/1.0/image/usr/bin /home/gelistirici/bitbake-builds/ornek/build/tmp/work/x86-64-v3-poky-linux/sensor-izle/1.0/image/etc/default
+    install -m 0755 /home/gelistirici/bitbake-builds/ornek/build/tmp/work/x86-64-v3-poky-linux/sensor-izle/1.0/sources/sensor-izle.sh /home/gelistirici/bitbake-builds/ornek/build/tmp/work/x86-64-v3-poky-linux/sensor-izle/1.0/image/usr/bin/sensor-izle
+    install -m 0644 /home/gelistirici/bitbake-builds/ornek/build/tmp/work/x86-64-v3-poky-linux/sensor-izle/1.0/sources/sensor-izle.default /home/gelistirici/bitbake-builds/ornek/build/tmp/work/x86-64-v3-poky-linux/sensor-izle/1.0/image/etc/default/sensor-izle
+
+    if false; then
+        install -d /home/gelistirici/bitbake-builds/ornek/build/tmp/work/x86-64-v3-poky-linux/sensor-izle/1.0/image/etc/init.d
+        install -m 0755 /home/gelistirici/bitbake-builds/ornek/build/tmp/work/x86-64-v3-poky-linux/sensor-izle/1.0/sources/sensor-izle.init /home/gelistirici/bitbake-builds/ornek/build/tmp/work/x86-64-v3-poky-linux/sensor-izle/1.0/image/etc/init.d/sensor-izle
+    fi
+    if true; then
+        install -d /home/gelistirici/bitbake-builds/ornek/build/tmp/work/x86-64-v3-poky-linux/sensor-izle/1.0/image/usr/lib/systemd/system
+        install -m 0644 /home/gelistirici/bitbake-builds/ornek/build/tmp/work/x86-64-v3-poky-linux/sensor-izle/1.0/sources/sensor-izle.service /home/gelistirici/bitbake-builds/ornek/build/tmp/work/x86-64-v3-poky-linux/sensor-izle/1.0/image/usr/lib/systemd/system/
+    fi
+}
+
+cd '/home/gelistirici/bitbake-builds/ornek/build/tmp/work/x86-64-v3-poky-linux/sensor-izle/1.0/sources'
+do_install
+
+# cleanup
+ret=$?
+trap '' 0
+exit $ret

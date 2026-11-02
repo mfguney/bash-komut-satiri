@@ -1,0 +1,20 @@
+#!/bin/sh
+# SPDX-License-Identifier: MIT
+# sensor-oku: Yocto kitabındaki C programının davranışını taklit eden kabuk benzetimi.
+# Kullanım: sensor-oku [1-100 arası okuma sayısı]
+adet=${1:-3}
+case $adet in
+    ''|*[!0-9]*) adet=0 ;;
+esac
+if [ "$adet" -lt 1 ] || [ "$adet" -gt 100 ]; then
+    echo "Kullanım: sensor-oku [1-100 arası okuma sayısı]" >&2
+    exit 1
+fi
+echo "Örnek ağ geçidi · sensör okuması"
+i=0
+while [ "$i" -lt "$adet" ]; do
+    # 21.0 + (i % 5) * 0.4 değerini tam sayı aritmetiğiyle (onda bir derece) hesapla
+    onda=$(( 210 + (i % 5) * 4 ))
+    printf '  sensor0  okuma %-3d  %3d.%d C\n' $((i + 1)) $((onda / 10)) $((onda % 10))
+    i=$((i + 1))
+done

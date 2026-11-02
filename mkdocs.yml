@@ -1,0 +1,120 @@
+# Linux Komut Satırı ve Bash — Gömülü Linux Kitaplığı
+site_name: Linux Komut Satırı ve Bash
+site_description: >-
+  Linux kabuğunu, metin işleme araçlarını ve sağlam Bash betikleri yazmayı gömülü sistem ve Yocto bağlamında anlatan açık kaynak Türkçe kitap.
+site_author: Gömülü Linux Kitaplığı katkıcıları
+site_url: https://mfguney.github.io/bash-komut-satiri/
+# Çevrimiçi ve çevrimdışı kullanımda bağlantıların aynı kalması için .html uzantılı adresler kullanılır
+use_directory_urls: false
+repo_url: https://github.com/mfguney/bash-komut-satiri
+repo_name: bash-komut-satiri
+edit_uri: edit/main/docs/
+copyright: >-
+  Metin <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.tr">CC BY-SA 4.0</a>,
+  örnek kodlar MIT lisanslıdır. Gömülü Linux Kitaplığı'nın bir parçasıdır.
+
+theme:
+  name: material
+  language: tr
+  logo: assets/logo.svg
+  favicon: assets/logo.svg
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: green
+      accent: teal
+      toggle:
+        icon: material/weather-night
+        name: Karanlık temaya geç
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: green
+      accent: teal
+      toggle:
+        icon: material/weather-sunny
+        name: Aydınlık temaya geç
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - navigation.indexes
+    - navigation.tracking
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - content.action.edit
+    - content.tooltips
+    - toc.follow
+
+extra_css:
+  - stylesheets/kitap.css
+
+extra_javascript:
+  - javascripts/senaryolar.js
+  - javascripts/quiz.js
+  - javascripts/akis-motor.js
+  - javascripts/terminal.js
+
+plugins:
+  - search:
+      lang: tr
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      permalink_title: Bu başlığa bağlantı
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.snippets:
+      auto_append:
+        - includes/kisaltmalar.md
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+nav:
+  - Başlangıç:
+      - index.md
+      - Kitabın kullanımı: nasil-okunur.md
+  - Bölümler:
+      - "1 · Kabuk, terminal ve komutların yapısı": bolumler/01-kabuk-ve-terminal.md
+      - "2 · Dosya sistemi, izinler ve kullanıcılar": bolumler/02-dosya-sistemi-izinler.md
+      - "3 · Metin işleme: grep, sed, awk, find, xargs": bolumler/03-metin-isleme.md
+      - "4 · Yönlendirme, borular, süreçler ve sinyaller": bolumler/04-yonlendirme-surecler.md
+      - "5 · Bash betiklerine giriş: değişkenler, tırnaklar, genişletmeler": bolumler/05-betik-temelleri.md
+      - "6 · Koşullar, döngüler, diziler ve fonksiyonlar": bolumler/06-kosul-dongu-fonksiyon.md
+      - "7 · Sağlam betikler: hata yönetimi, trap, getopts, ShellCheck": bolumler/07-saglam-betikler.md
+      - "8 · Gömülü sistemlerde ve Yocto'da kabuk betikleri": bolumler/08-gomulu-betikler.md
+  - Etkileşimli araçlar:
+      - Animasyonlu şemalar: araclar/animasyonlar.md
+  - Ekler:
+      - Terimler sözlüğü: ekler/sozluk.md
+      - Komut özeti: ekler/komut-ozeti.md
+      - Kaynakça ve ileri okuma: ekler/kaynakca.md

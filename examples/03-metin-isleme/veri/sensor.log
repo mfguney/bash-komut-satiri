@@ -1,0 +1,36 @@
+2026-11-02T10:00:05 agecidi sensor-oku[412]: sensor0 sicaklik=21.8 durum=TAMAM
+2026-11-02T10:00:15 agecidi sensor-oku[412]: sensor1 sicaklik=23.9 durum=TAMAM
+2026-11-02T10:00:20 agecidi sensor-oku[412]: sensor2 sicaklik=20.4 durum=TAMAM
+2026-11-02T10:00:25 agecidi sensor-oku[412]: sensor0 sicaklik=20.9 durum=TAMAM
+2026-11-02T10:00:30 agecidi sensor-oku[412]: sensor1 sicaklik=24.3 durum=TAMAM
+2026-11-02T10:00:35 agecidi sensor-oku[412]: sensor2 sicaklik=19.3 durum=TAMAM
+2026-11-02T10:00:45 agecidi sensor-oku[412]: sensor0 sicaklik=21.0 durum=TAMAM
+2026-11-02T10:00:50 agecidi sensor-oku[412]: sensor1 sicaklik=23.0 durum=TAMAM
+2026-11-02T10:01:00 agecidi sensor-oku[412]: sensor2 sicaklik=19.3 durum=TAMAM
+2026-11-02T10:01:05 agecidi sensor-oku[412]: sensor0 sicaklik=21.8 durum=TAMAM
+2026-11-02T10:01:10 agecidi sensor-oku[412]: sensor1 sicaklik=23.8 durum=TAMAM
+2026-11-02T10:01:20 agecidi sensor-oku[412]: HATA sensor2: okuma zaman aşımı (i2c-1, adres 0x48)
+2026-11-02T10:01:25 agecidi sensor-oku[412]: sensor0 sicaklik=21.9 durum=TAMAM
+2026-11-02T10:01:30 agecidi sensor-oku[412]: sensor1 sicaklik=23.7 durum=TAMAM
+2026-11-02T10:01:35 agecidi sensor-oku[412]: sensor2 sicaklik=19.6 durum=TAMAM
+2026-11-02T10:01:40 agecidi sensor-oku[412]: sensor0 sicaklik=21.2 durum=TAMAM
+2026-11-02T10:01:45 agecidi sensor-oku[412]: sensor1 sicaklik=23.7 durum=TAMAM
+2026-11-02T10:01:50 agecidi modbus-izle[455]: UYARI bağlantı yeniden kuruldu: 192.168.7.10:502
+2026-11-02T10:01:55 agecidi sensor-oku[412]: sensor0 sicaklik=21.3 durum=TAMAM
+2026-11-02T10:02:00 agecidi sensor-oku[412]: sensor1 sicaklik=27.0 durum=ESIK
+2026-11-02T10:02:05 agecidi sensor-oku[412]: sensor2 sicaklik=20.0 durum=TAMAM
+2026-11-02T10:02:10 agecidi sensor-oku[412]: sensor0 sicaklik=21.1 durum=TAMAM
+2026-11-02T10:02:20 agecidi sensor-oku[412]: sensor1 sicaklik=27.6 durum=ESIK
+2026-11-02T10:02:30 agecidi sensor-oku[412]: sensor2 sicaklik=20.1 durum=TAMAM
+2026-11-02T10:02:40 agecidi sensor-oku[412]: sensor0 sicaklik=20.9 durum=TAMAM
+2026-11-02T10:02:45 agecidi sensor-oku[412]: HATA sensor1: okuma zaman aşımı (i2c-1, adres 0x48)
+2026-11-02T10:02:50 agecidi sensor-oku[412]: sensor2 sicaklik=20.2 durum=TAMAM
+2026-11-02T10:02:55 agecidi sensor-oku[412]: sensor0 sicaklik=20.5 durum=TAMAM
+2026-11-02T10:03:00 agecidi sensor-oku[412]: sensor1 sicaklik=27.2 durum=ESIK
+2026-11-02T10:03:05 agecidi sensor-oku[412]: sensor2 sicaklik=20.3 durum=TAMAM
+2026-11-02T10:03:10 agecidi sensor-oku[412]: HATA sensor0: CRC uyuşmazlığı
+2026-11-02T10:03:15 agecidi sensor-oku[412]: sensor1 sicaklik=23.1 durum=TAMAM
+2026-11-02T10:03:25 agecidi sensor-oku[412]: sensor2 sicaklik=19.4 durum=TAMAM
+2026-11-02T10:03:30 agecidi sensor-oku[412]: sensor0 sicaklik=20.6 durum=TAMAM
+2026-11-02T10:03:40 agecidi sensor-oku[412]: sensor1 sicaklik=23.5 durum=TAMAM
+2026-11-02T10:03:45 agecidi sensor-oku[412]: sensor2 sicaklik=20.3 durum=TAMAM
